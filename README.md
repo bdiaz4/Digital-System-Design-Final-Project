@@ -1,9 +1,10 @@
 # Digital-System-Design-Final-Project
 ## Expected Behavior
-In "Weakness”, you control a character that can use the directional buttons to move up and down and aim left or right, and the center button to fire a projectile. Enemies appear on the sides of the screen and attempt to reach the player in the center.\
-The right 7-segment display (rightmost 4 digits) displays the number of successfully eliminated enemies. The left 7-segment display (leftmost 1 digit) displays the weakness number of the enemy the character is looking at.\
+In "Weakness”, you control a triangular character that can use the directional buttons to move up and down and aim left or right (indicated by the direction the triangle is pointing), and the center button to eliminate an enemy or start the game if it is not currently running. Enemies appear on the sides of the screen and attempt to reach the player in the center.
+The right 7-segment display (rightmost 4 digits) displays the number of successfully eliminated enemies. The left 7-segment display (leftmost 1 digit) displays the weakness number of the enemy the character is looking at.
 The character cannot fire unless exactly 1 of the switches is on (up). An enemy with a certain enemy number can only be destroyed by a projectile with that respective number. 
-You lose when an enemy reaches the center row.
+You lose when an enemy reaches the center of the screen, where the player is located.
+
 ![](20250508_153933.jpg)
 ## Attachments
 The Nexys board will utilize buttons for moving the player, switches for enemy targeting, and a 7-segment display for outputing game information.
