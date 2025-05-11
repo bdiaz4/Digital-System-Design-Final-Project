@@ -18,8 +18,9 @@ Linear Shift Register RNG, Onboard buttons, switches
 ### Outputs:
 Enemy placement/direction, player movement and direction, valid_weakness flag
 ## Starting Code
-No lab code was directly started from, preferring to write the project from scratch to avoid errors. However, many vhd files were used for general setup of displays and periperals. The pong lab was used to set up the vga_sync, leddec16, clk_wiz_0, and clk_wiz_0_clk_wiz for the VGA and 7-segment display. Files form lab 5 tone and dac_if were resued to provide simple sound effects. Finally, the constraint file was built from prior documentation of the Nexys board with inputs added and taken away based on what was required.\
+No lab code was directly started from, preferring to write the project from scratch to avoid errors. However, many vhd files were used for general setup of displays and peripherals. The Pong lab was used to set up the vga_sync, leddec16, clk_wiz_0, and clk_wiz_0_clk_wiz for the VGA and 7-segment display. Files from lab 5 tone and dac_if were reused to provide simple sound effects. Finally, the constraint file was built from prior documentation of the Nexys board with inputs added and taken away based on what was required.\
 ### Changes:
 Leddec16- anodes 4, 5, and 6 were removed so the weakness value would be separated from the 4-digit score.
 ![display](20250508_153923.jpg)\
 tone- The modified square wave was chosen to output sound effects and the pitch was changed based on player or enemy death
+Constraint file- All 4 VGA color bits are defined to have access to more vivid colors.
