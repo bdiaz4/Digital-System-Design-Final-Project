@@ -31,10 +31,17 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 ![board](20250508_154102.jpg)
 ---
 ### Inputs:
-All 5 Onboard Buttons, All 16 Onboard Switches
+- All 5 Onboard Buttons
+- All 16 Onboard Switches
+- Onboard 100MHz Clock 
 ---
 ### Outputs:
-Score and Weakness value on the 7-segment display, Character 
+- 7-Segment Display
+  - Shows the Weakness value and the current score
+- VGA Connector
+  - Shows the game state, character and all enabled enemies
+- DAC Module (PMOD Port JA)
+  - Plays a square-wave tone when an enemy is eliminated and a lower-pitched tone when the player is eliminated and the game ends 
 ---
 ## Starting Code
 No lab code was directly started from, preferring to write the project from scratch to avoid errors. However, many vhd files were used for general setup of displays and peripherals. The Pong lab was used to set up the vga_sync, leddec16, clk_wiz_0, and clk_wiz_0_clk_wiz for the VGA and 7-segment display. Files from lab 5 tone and dac_if were reused to provide simple sound effects. Finally, the constraint file was built from prior documentation of the Nexys board with inputs added and taken away based on what was required.
