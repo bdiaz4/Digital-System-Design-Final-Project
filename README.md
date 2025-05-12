@@ -12,7 +12,7 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 ---
 ## Attachments
 - The Pmod I2S2 DAC module will play square-wave sound effects when the player successfully kills an enemy or when an enemy reaches the player when the game is over.
-  - The module should be connected to PMOD port JA in the middle of the right side of the Nexys A7 board. 
+  - The module should be connected to Pmod port JA in the middle of the right side of the Nexys A7 board. 
 - The female VGA connector will be connected to a display via a male VGA cable or the VGA to HDMI converter and will be used to output visuals of the player character and enemies.
   - Note: if the display supports audio, it is recommended to connect the DAC module output directly to the display's audio input, as the included DAC speaker is very quiet even at its maxiumu theoretical volume. 
 
@@ -39,7 +39,7 @@ In this custom video game titled "Weakness”, the player controls a triangular 
   - Shows the Weakness value and the current score
 - VGA Connector
   - Shows the game state, character and all enabled enemies
-- DAC Module (PMOD Port JA)
+- DAC Module (Pmod Port JA)
   - Plays a square-wave tone when an enemy is eliminated and a lower-pitched tone when the player is eliminated and the game ends 
 ---
 ## Starting Code/Changes: 
