@@ -1,4 +1,4 @@
-# Digital-System-Design-Final-Project
+# Digital System Design Final Project: "Weakness" 
 ---
 ## Expected Behavior
 In this custom video game titled "Weakness”, the player controls a triangular character that can use the directional buttons to move up and down and aim left or right (indicated by the direction the triangle is pointing), and the center button to eliminate an enemy or start the game if it is not currently running (indicated by the red screen). 
@@ -34,7 +34,6 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 - All 5 Onboard Buttons
 - All 16 Onboard Switches
 - Onboard 100MHz Clock 
----
 ### Outputs:
 - 7-Segment Display
   - Shows the Weakness value and the current score
@@ -43,10 +42,21 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 - DAC Module (PMOD Port JA)
   - Plays a square-wave tone when an enemy is eliminated and a lower-pitched tone when the player is eliminated and the game ends 
 ---
-## Starting Code
-No lab code was directly started from, preferring to write the project from scratch to avoid errors. However, many vhd files were used for general setup of displays and peripherals. The Pong lab was used to set up the vga_sync, leddec16, clk_wiz_0, and clk_wiz_0_clk_wiz for the VGA and 7-segment display. Files from lab 5 tone and dac_if were reused to provide simple sound effects. Finally, the constraint file was built from prior documentation of the Nexys board with inputs added and taken away based on what was required.
----
-### Changes:
+## Starting Code/Changes: 
+No specific lab code was a direct "starting point," as we initially began writing the primary project file from scratch to avoid unnecessary overhead in development. However, the project is loosely based around some files (particularly drivers) from Labs 3 and 5 (bouncing ball and siren) as these provided the basic starter code necessary to generate signals to control the VGA display and the DAC. The `leddec16` file was also modified to serve as a driver for the specific data to be rendered on the 7-segment displays. The Pong lab was used to set up the `vga_sync`, `leddec16`, `clk_wiz_0`, and `clk_wiz_0_clk_wiz` for the VGA and 7-segment display. 
+- `vga_sync.vhd` is a general-purpose driver providing rendering capabilities for the board's built-in VGA output.
+  - Notably, this file was not directly modified, as this would compromise its functionality, but the way in which it is utilized was different from previous labs, as all 4 bits of each color (RGB) were utilized within the input in `weakness.vhd` for a more diverse palette (and to make the character orange)
+- `clk_wiz_0.vhd` and `clk_wiz_0_clk_wiz.vhd` are used unmodified to provide the 25MHz clock required by the VGA driver to function, creating a signal called `pxl_clk`for this purpose.
+- `leddec16.vhd` was modified to have a 20-bit (5-digit) input signal, and the last 3 digits of the left display were disabled, with the 5 digits of the input being mapped to the 5 remaining digits.
+  - The purpose of this change was to allow the input signal to contain a concatenation of the weakness value (leftmost digit) and the score (right 4 digits) with a separation between them. 
+Files from lab 5 `tone` and `dac_if` were reused to provide simple square-wave based sound effects.
+- Notably, automated pitch modulation was unnecessary, so `wail.vhd` was omitted, and the data from `tone.vhd` was directly mapped through to the `dac_if.vhd` file.
+  - The `index` signal was removed entirely, as there was no need to generate any ramp-like waveforms.
+  - A new input `enabled` was added to force the waveform to take on a singular value (thus not making a wave) when this signal was '0'. 
+- `dac_if.vhd` was unmodified, but notably, its inputs in `weakness.vhd` had to be modified to function with a 100MHz clock as opposed to a 50MHz clock, so the `count` values were offset by 1. 
+Finally, the constraints file `weakness.xdc` was built from prior documentation of the Nexys board with inputs added and taken away based on what was required for the inputs and outputs. 
+
+## Development Process:
 Leddec16- anodes 4, 5, and 6 were removed so the weakness value would be separated from the 4-digit score.
 ![display](20250508_153923.jpg)\
 tone- The modified square wave was chosen to output sound effects and the pitch was changed based on player or enemy death.
