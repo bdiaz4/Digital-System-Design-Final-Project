@@ -69,6 +69,7 @@ It is notable that examples from these two labs were examined to give us an idea
 The project began with downloading and including the driver files within the project. After the game's logic design was decided, all of the inputs and outputs were known, so a `weakness.xdc` file was generated using the pin numbers from the inputs and outputs required for these functions on the board. 
 
 The first pieces completed were the addition of the basic signals the game would require to function and the establishment of the modifications and instantiation of the `leddec16` driver, which would then be used to test the addition of features without developing the entire rendering pipeline first. 
+
 ![image](https://github.com/user-attachments/assets/95bb02dd-f032-4a8c-a4a2-55299aa4a13e)
 
 The clock was added, as well as a count signal to function with the clock and allow for clock signal division for processes. This was useful for the update process, which was the primary location in which clock-based game events occurred. The first of these to be implemented was character movement, as well as character direction pointing. The game's start/game over state signal was also added here. 
@@ -78,10 +79,12 @@ The game's main feature was also added early in the process, with the switches b
 ![image](https://github.com/user-attachments/assets/1cfa8ae4-06c7-4409-8e48-34a8e1e2ce9c)
 
 The enemy management was then completed. A custom type `enemy_array` was added to manage several specific std_logic_vectors to store the enemies. 2 of these were instantiated to allow the two sides of the screen to contain enemies, and the character's "current facing enemy" was determined by utilizing a simple bit-shifting division trick to determine a range of vertical pixels the character position was in. This was greatly simplified by the fact that only 10 specifically defined rows of enemies were generated, so the "current facing enemy" could be easily determined. Each enemy was represented by a 15-bit std_logic_vector, with the first bit determining the enemy's "on/off" state, the next 4 being the corresponding "weakness" value needed to be matched to eliminate it, and the rest of the bits determined its position on the screen, which only needed to be horizontal for the same reason that the player position only needs to be vertical, as each has only 1 axis of movement. 
+
 ![image](https://github.com/user-attachments/assets/590ec0dc-1889-44f6-a35c-fc12307020b9)
 ![image](https://github.com/user-attachments/assets/ec3770f6-6817-44bb-9bd0-de360c9138a4)
 
 The rendering process was then added. This was a challenge, as the enemies were originally updated in a "loop" managed by a divided clock, with their positions being incremented (or decremented for the right side of the screen) individually. The `vga_sync.vhd` file was instantiated along with the required `clk_wiz` files, but enemies were originally being rendered as asynchronous "flashes" of pixels. The character rendering was implemented, with the main difficulty being determining the correct pixels to exclude from the square around the character's position to produce a center-pointed triangle facing the direction determined by the character direction bit. The enemy rendering was fixed by updating all enemies at the same time in the primary update process, although they update movement-wise half as fast as the character. 
+
 ![image](https://github.com/user-attachments/assets/2a5c2485-2399-4a54-acd5-dc4bfda50cf3)
 ![image](https://github.com/user-attachments/assets/2de34934-722f-4dd7-938b-6c70bbd0da77)
 ![image](https://github.com/user-attachments/assets/a70699e0-b317-46be-a240-31fa6af9590e)
@@ -90,11 +93,13 @@ Enemy elimination was also added at this point, with the main difficulty being t
 
 
 The final addition to the game to make it fully functional was a pseudo-random number generator. This was accomplished simply using a Linear-Feedback Shift Register. This was a 48-bit std_logic_vector that, on each clock cycle, would be shifted to the right 1 bit, with the new empty left bit being set to the result of several values within the register sequentially XORed together. To make this value actually "random" every playthrough, it was initialized to a permutation of `count` when the game starts, meaning it would be initialized to a different value each time, with a very low chance of the same value occurring twice due to the 100MHz precision of the input required for this to occur. The register was then partially stored in a temporary signal to initialize new enemies in the update process, with this occurring at a random chance on a slower division of the clock cycle. "Random" bits of the register were used as a random number to randomly determine which new enemy to initialize, and to provide this enemy a random weakness value. 
+
 ![image](https://github.com/user-attachments/assets/9e6fb692-0de1-416c-b65b-050fcb9463ef)
 ![image](https://github.com/user-attachments/assets/be1d2613-caaa-4613-b0e6-7945a53c418d)
 ![image](https://github.com/user-attachments/assets/f1c99edd-9229-414d-b6bf-f93d88c1a537)
 
 The final addition to the game was sound. Necessary signals to drive the DAC driver files were added, as well as a `sound_flag` to control if sound is being played at all. The pitch signal was set to a high pitch every time an enemy was eliminated and a lower pitch every time the game ended, with the modifications stated made to the `tone` file depending on these signals. The `sound_flag` was set to 1 upon these events occurring, and was reset back to 0 on a specific divided clock cycle to ensure that the sound would always end quickly after being played. This does provide variable-length sound effects, but the sound effects are short and simple enough for this to not matter. 
+
 ![image](https://github.com/user-attachments/assets/478f3ae3-284b-4db5-be35-b6a31c51e882)
 ![image](https://github.com/user-attachments/assets/533647c4-2f60-4f34-83e3-31bfb81ef74a)
 ![image](https://github.com/user-attachments/assets/5e99f2f1-ab53-4642-87fc-aeffccbfed03)
