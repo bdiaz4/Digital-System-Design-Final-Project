@@ -25,7 +25,9 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 5. Run Synthesis
 6. Run Implementation
 7. Generate Bitstream
-8. Open Hardware Manager, click Auto Connect, and Program Device followed by the device. 
+8. Open Hardware Manager, click Auto Connect, and Program Device followed by the device.
+9. Ensure that all attachments and supplementary hardware, including the external display/speakers are on and functioning, and that they are properly connected to the device in accordance with the Attachments section.
+10. The game should enter its initial state by displaying a red screen. 
 ![board](20250508_154102.jpg)
 ---
 ### Inputs:
