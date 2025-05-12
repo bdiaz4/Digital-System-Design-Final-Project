@@ -91,6 +91,6 @@ Bridgette Diaz:
 
 Note: The majority of the project was completed using a shared OneDrive folder due to technical issues with GitHub synchronization, so there is no person-based commit history on this repository. Additionally, during in-lab testing, due to these synchronization issues, most of the project's progress made during lab time occurred with both team members working on Jason's laptop. 
 
-Conclusion: 
+## Conclusion: 
 This simple game was a successful demonstration of developing a game at the hardware level using unorthodox game-develpment practices in VHDL, a hardware description language that lacks inherent concepts of synchronous, sequential event management or a `random()` function. The challenge of implementing game events and updating was overcome, and the result is a signifncantly more complex result than pong, which was specifically play-tested to be fun while also challenging with a significant learning curve. 
 
