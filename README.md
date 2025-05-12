@@ -52,11 +52,13 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 No specific lab code was a direct "starting point," as we initially began writing the primary project file from scratch to avoid unnecessary overhead in development. However, the project is loosely based around some files (particularly drivers) from Labs 3 and 5 (bouncing ball and siren) as these provided the basic starter code necessary to generate signals to control the VGA display and the DAC. The `leddec16` file was also modified to serve as a driver for the specific data to be rendered on the 7-segment displays. The Pong lab was used to set up the `vga_sync`, `leddec16`, `clk_wiz_0`, and `clk_wiz_0_clk_wiz` for the VGA and 7-segment display. 
 - `vga_sync.vhd` is a general-purpose driver providing rendering capabilities for the board's built-in VGA output.
   - Notably, this file was not directly modified, as this would compromise its functionality, but the way in which it is utilized was different from previous labs, as all 4 bits of each color (RGB) were utilized within the input in `weakness.vhd` for a more diverse palette (and to make the character orange)
-- `clk_wiz_0.vhd` and `clk_wiz_0_clk_wiz.vhd` are used unmodified to provide the 25MHz clock required by the VGA driver to function, creating a signal called `pxl_clk`for this purpose.
+- `clk_wiz_0.vhd` and `clk_wiz_0_clk_wiz.vhd` are used unmodified to provide the 25MHz clock required by the VGA driver to function, creating a signal called `pxl_clk` for this purpose.
 - `leddec16.vhd` was modified to have a 20-bit (5-digit) input signal, and the last 3 digits of the left display were disabled, with the 5 digits of the input being mapped to the 5 remaining digits.
+![image](https://github.com/user-attachments/assets/3884e475-3275-4981-93f3-27634b20b25e)
   - The purpose of this change was to allow the input signal to contain a concatenation of the weakness value (leftmost digit) and the score (right 4 digits) with a separation between them. 
 Files from lab 5 `tone` and `dac_if` were reused to provide simple square-wave based sound effects.
 - Notably, automated pitch modulation was unnecessary, so `wail.vhd` was omitted, and the data from `tone.vhd` was directly mapped through to the `dac_if.vhd` file.
+![image](https://github.com/user-attachments/assets/0f798b20-df92-4668-bdd4-f3f5577bcb19)
   - The `index` signal was removed entirely, as there was no need to generate any ramp-like waveforms.
   - A new input `enabled` was added to force the waveform to take on a singular value (thus not making a wave) when this signal was '0'. 
 - `dac_if.vhd` was unmodified, but notably, its inputs in `weakness.vhd` had to be modified to function with a 100MHz clock as opposed to a 50MHz clock, so the `count` values were offset by 1. 
