@@ -38,8 +38,12 @@ In this custom video game titled "Weakness”, the player controls a triangular 
 ---
 ### Inputs:
 - All 5 Onboard Buttons
+  - Directional buttons control the vertical movement and horizontal facing of the character
+  - Center button controls the game starting and the enemy elimination 
 - All 16 Onboard Switches
-- Onboard 100MHz Clock 
+  - Used to set the character's target weakness value to eliminate enemies 
+- Onboard 100MHz Clock
+  - Used to control timing for in-game events, processing, updates, sound, and VGA rendering 
 ### Outputs:
 - 7-Segment Display
   - Shows the Weakness value and the current score
