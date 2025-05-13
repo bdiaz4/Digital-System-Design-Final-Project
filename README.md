@@ -1,7 +1,7 @@
 # Digital System Design Final Project: "Weakness" 
 ---
 ## Video of Behavior 
-Video: [https://www.youtube.com/watch?v=-D2QKkhQYyk][https://www.youtube.com/watch?v=-D2QKkhQYyk]
+Video: [https://www.youtube.com/watch?v=-D2QKkhQYyk] 
 ---
 ## Expected Behavior
 In this custom video game titled "Weakness”, the player controls a triangular character that can use the directional buttons to move up and down and aim left or right (indicated by the direction the triangle is pointing), and the center button to eliminate an enemy or start the game if it is not currently running (indicated by the red screen). 
